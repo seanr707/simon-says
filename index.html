@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Simon Says</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simon® Says!</title>
+
+
+    
+    
+    
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+    
+  </head>
+
+  <body>
+
+    <!-- Sounds for each button -->
+<audio id = "red" preload="auto">
+  <source src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></source>
+  Your browser isn't invited for SUPER DUPER fun audio time.
+</audio>
+<audio id="blue">
+  <source src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></source>
+</audio>
+<audio id="yellow">
+  <source src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></source>
+</audio>
+<audio id="green">
+  <source src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></source>
+</audio>
+
+<div class="whole container-fluid" ng-app="simon" ng-controller="simonSays">
+  <!-- Win Pop Up -->
+  <div class="blanket" ng-show="win">
+    <div class="win">
+      <h2>You win 10,000 Internet Points!</h2>
+    </div>
+  </div>
+  <!-- Covers screen when stopped or CPU going -->
+  <div class="cover" ng-show="cover">
+  </div>
+  <!-- Gray background of board -->
+  <div class="backdrop">
+    <!-- Centers all buttons -->
+    <div class="buttons">
+      <!-- For Control buttons and display -->
+      <div class="frontdrop">
+        <div class="minifront">
+          <div class="spacer"></div>
+          <div class="title">Simon<div class="trademark">®</div></div>
+          <div class="count">{{ display }}</div>
+          <div class="btn-row">
+            <!-- Control buttons -->
+            <div class="btn-section">
+              <div class="light" ng-hide="on"></div>
+              <div class="light on play-indicator" ng-show="on"></div>
+              <button class="play" ng-click="play()">{{ playText }}</button>
+            </div>
+            <!-- Button disabled when game is on and CPU is going -->
+            <button class="reset" ng-click="reset()" ng-disabled="on && cover">Reset</button>
+            <div class="btn-section">
+              <div class="light" ng-hide="strict"></div>
+              <div class="light on strict-indicator" ng-show="strict"></div> 
+              <button class="strict" ng-click="strict = strict ? false : true" ng-disabled="on">Strict</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Rows for Game buttons to be created -->
+      <div class="arow top">
+        <div ng-repeat="color in top" class="color" ng-class="myVar" ng-init="myVar=color" ng-mousedown="myVar=color+' lighten'" ng-mouseup="myVar=color" ng-click="add(color)" ng-disabled="running"></div>
+      </div>
+      <div class="arow bottom">
+        <div ng-repeat="color in bottom" class="color" ng-class="myVar" ng-init="myVar=color" ng-mousedown="myVar=color+' lighten'" ng-mouseup="myVar=color" ng-click="add(color)" ng-disabled="running"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+  </body>
+</html>
